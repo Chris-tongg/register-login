@@ -1,0 +1,32 @@
+rocketmq:
+  name-server: 119.23.190.71:9876
+  user-topic: "user-topic-dong"
+  user-topic-register: "user-topic-register-dong"
+
+spring:
+  mail:
+    # 163配置
+    host: smtp.163.com
+    username: Huang275251@163.com
+    password: Huang123
+    port: 25
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.starttls.auth: true
+    from-name: Huang275251@163.com
+
+  redis:
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+    host: 114.116.232.60
+    port: 6379
+    database: 10
+    timeout: 3000
+    password: ""
+
+active:
+  base-url: http://localhost:8888/api/v1/user/active

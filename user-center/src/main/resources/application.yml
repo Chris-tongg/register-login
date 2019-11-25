@@ -1,0 +1,89 @@
+spring:
+  application:
+    name: user-center
+  #  redis 配置
+  redis:
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+    host: 114.116.232.60
+    port: 6379
+    database: 10
+    timeout: 3000
+    password: ""
+
+  datasource:
+    #===========JDBC 配置===========
+    url: jdbc:mysql://112.74.42.138:3306/db_conmmuty-account?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    # 初始化线程池数量  最大数  最小数
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 驱动包 8.0以上的配置
+    # =========== durid 连接池配置===========
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 3
+      # 配置获取连接等待超时的时间 单位毫秒
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: select
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      #      配置监控统计拦截器 日志配置  防火墙
+      #      stat监控数据库性能
+      #      wall  用于防火墙
+      #      日志 slf4j logback
+      #      log4j
+      #      log4j2
+      # 配置多个英文逗号分隔
+      filters: stat,wall,slf4j
+      max-pool-prepared-statement-per-connection-size: 20
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+mybatis-plus:
+  # 如果是放在src/main/java目录下 classpath:/com/你的包名/*/mappers/*.xml
+  # 如果放在 src/main/resources 下
+  mapper-locations: classpath:/mappers/**/*.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  #  typeAliasesPackage: com.vp.example.*.entity
+  global-config:
+    db-config:
+      # 主键类型
+      id-type: auto
+      #驼峰下划线转换
+      table-underline: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    #配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: 'null'
+server:
+  port: 8888
+  servlet:
+    context-path: /api/v1
+
+rocketmq:
+  name-server: 119.23.190.71:9876
+  producer:
+    group: "user-group-dong"
+
+  user-topic: "user-topic-dong"
+  user-topic-register: "user-topic-register-dong"
